@@ -1,0 +1,94 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Resejournal.MainPage"
+             xmlns:model="clr-namespace:Resejournal.Models"
+             xmlns:viewmodel="clr-namespace:Resejournal.ViewModels"
+             x:DataType="viewmodel:TripListViewModel"
+             Title="{Binding Title}">
+
+
+    <Grid ColumnDefinitions="*,*"
+          ColumnSpacing="5"
+          RowDefinitions="*,Auto"
+          >
+
+        <CollectionView Grid.ColumnSpan="2"
+                        ItemsSource="{Binding Trips}"
+                        SelectionMode="None"
+                       >
+
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="model:Trip">
+                    <Frame
+                           Padding="15"
+                           Margin="8,5,8,5">
+                        <Grid RowSpacing="5">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="*" />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            
+                            
+                           <Image Source="Resources/Images/travel.png"
+                                   HeightRequest="50"
+                                   WidthRequest="50"
+                                   VerticalOptions="Start"
+                                   Grid.RowSpan="2"
+                                   Grid.Column="0" />
+
+                            <!-- Trip Title -->
+                            <Label Text="{Binding Title}"
+                                   FontSize="Medium" 
+                                   FontAttributes="Bold"
+                                   TextColor="Black"
+                                   VerticalOptions="Center"
+                                   HorizontalOptions="Center"
+                                  
+                                   Grid.Row="0"
+                                   Grid.Column="1" />
+
+                            <!-- Trip Date -->
+                            <Label Text="{Binding TripDate, StringFormat='{0:yyyy-MM-dd}'}"
+                                   FontSize="Small"
+                                   TextColor="Gray"
+                                   VerticalOptions="Center"
+                                   HorizontalOptions="CenterAndExpand"
+                                   Grid.Row="1"
+                                   Grid.Column="1" />
+
+                            <!-- Details Button -->
+                            <Button Text="View trip images"
+                                    HeightRequest="40"
+                                    WidthRequest="120"
+                                    HorizontalOptions="Center"
+                                    VerticalOptions="Center"
+                                    Grid.Row="2"
+                                    Grid.ColumnSpan="2" 
+                                    FontSize="Micro"
+                                    />
+                        </Grid>
+                    </Frame>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+
+        </CollectionView>
+        <Button Text="Get Trips"
+                Command="{Binding GetTripListCommand}"
+                IsEnabled="{Binding IsNotLoading}"
+                Grid.Row="1"
+                Grid.Column="0"
+               
+                FontSize="Small"></Button>
+    </Grid>
+
+
+
+
+
+</ContentPage>
