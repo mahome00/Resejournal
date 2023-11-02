@@ -1,23 +1,25 @@
 ﻿using CommunityToolkit.Mvvm.Input;
 using Resejournal.Models;
-using Resejournal.Services;
 using Resejournal.Views;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
+
 
 namespace Resejournal.ViewModels
 {
     public partial class TripListViewModel : BaseViewModel
     {
-        private readonly TripService tripService;
+
 
         public ObservableCollection<Trip> Trips { get; private set; } = new();
 
-        public TripListViewModel(TripService tripService)
+        public TripListViewModel()
         {
-            Title = "Your Trips";
-            this.tripService = tripService;
+            Titlepage = "Your Trips";
+
         }
+
+        // Testar för att lägga till trip
 
         [RelayCommand]
         async Task GetTripList()
@@ -26,9 +28,11 @@ namespace Resejournal.ViewModels
 
             try
             {
+
+                IsLoading = true;
                 if (Trips.Any()) Trips.Clear();
 
-                var trips = tripService.GetTrips();
+                var trips = App.TripService.GetTrips();
                 foreach (var trip in trips)
                 {
                     Trips.Add(trip);
@@ -48,18 +52,19 @@ namespace Resejournal.ViewModels
         }
 
         [RelayCommand]
-        async Task GetTripDetail(Trip trip)
+        async Task GoToTripDetail(Trip trip)
         {
 
             if (trip == null) return;
 
-            await Shell.Current.GoToAsync(nameof(TripDetailPage), true, new Directory<string, object>
+            await Shell.Current.GoToAsync(nameof(TripDetailPage), true, new Dictionary<string, object>
             {
+
                 {nameof(Trip), trip }
             });
-
-
         }
+
+
 
     }
 }

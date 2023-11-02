@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<mct:Popup xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+           xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+           xmlns:mct="clr-namespace:CommunityToolkit.Maui.Views;assembly=CommunityToolkit.Maui"
+           x:Class="Resejournal.Views.AddTripPopupPage"
+           CanBeDismissedByTappingOutsideOfPopup="False"
+           x:DataType="viewmodel:AddTripPopupViewModel"
+           xmlns:viewmodel="clr-namespace:Resejournal.ViewModels"
+           Size="300, 300"
+           >
+
+    <VerticalStackLayout BackgroundColor="WhiteSmoke"
+                         Padding="20"
+                         Spacing="20"
+                         HorizontalOptions="FillAndExpand"
+                         VerticalOptions="End">
+
+        <Label Text="Add your trip" FontSize="Medium" />
+        <!-- Title Entry -->
+        <Entry x:Name="TitleEntry"
+               Placeholder="Enter trip title"
+           Text="{Binding Title}" />
+
+        <!-- Date Picker -->
+        <DatePicker x:Name="DatePick"
+                    Date="{Binding TripDate}" />
+
+        <!-- Buttons -->
+        <Grid RowDefinitions="Auto"
+              ColumnDefinitions="*,*">
+
+            <Button Text="Save"
+                    HorizontalOptions="Center"
+                    Grid.Row="0"
+                    Grid.Column="0"
+                    Command="{Binding SaveTripCommand}"/>
+
+            <Button Text="Cancel"
+                    HorizontalOptions="Center"
+                    Grid.Row="0"
+                    Grid.Column="1"
+                    Clicked="Cancel_Clicked"/>
+        </Grid>
+
+    </VerticalStackLayout>
+</mct:Popup>

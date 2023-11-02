@@ -5,7 +5,7 @@
              xmlns:model="clr-namespace:Resejournal.Models"
              xmlns:viewmodel="clr-namespace:Resejournal.ViewModels"
              x:DataType="viewmodel:TripListViewModel"
-             Title="{Binding Title}">
+             Title="{Binding Titlepage}">
 
 
     <Grid ColumnDefinitions="*,*"
@@ -63,15 +63,17 @@
                                    Grid.Column="1" />
 
                             <!-- Details Button -->
-                            <Button Text="View trip images"
+                            <Button Text="Add/View images"
                                     HeightRequest="40"
                                     WidthRequest="120"
                                     HorizontalOptions="Center"
                                     VerticalOptions="Center"
                                     Grid.Row="2"
+                                    BackgroundColor="#4285F4"
                                     Grid.ColumnSpan="2" 
                                     FontSize="Micro"
-                                    />
+                                    Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:TripListViewModel}}, Path=GoToTripDetailCommand}" 
+                                    CommandParameter="{Binding .}"/>
                         </Grid>
                     </Frame>
                 </DataTemplate>
@@ -85,6 +87,21 @@
                 Grid.Column="0"
                
                 FontSize="Small"></Button>
+
+        <Button Text="+"
+                WidthRequest="60"
+                FontSize="Large"
+                BackgroundColor="#4285F4"
+                HeightRequest="60"
+                CornerRadius="35"
+                VerticalOptions="End"
+                HorizontalOptions="End"
+                Margin="0,0,20,20"
+                Clicked="ShowPopup_Clicked"
+                Grid.ColumnSpan="2"   
+            Grid.Row="1">
+
+        </Button>
     </Grid>
 
 

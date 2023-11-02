@@ -6,7 +6,7 @@ namespace Resejournal.ViewModels
     {
 
         [ObservableProperty]
-        string title;
+        string titlepage;
 
 
         [ObservableProperty]

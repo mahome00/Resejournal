@@ -1,4 +1,6 @@
-﻿using Resejournal.ViewModels;
+﻿using CommunityToolkit.Maui.Views;
+using Resejournal.ViewModels;
+using Resejournal.Views;
 
 namespace Resejournal
 {
@@ -11,11 +13,18 @@ namespace Resejournal
         {
             InitializeComponent();
             BindingContext = tripListViewModel;
-
-
-
         }
 
+        private void ShowPopup_Clicked(object sender, EventArgs e)
+        {
 
+
+
+            var addTripPopupViewModel = new AddTripPopupViewModel();
+            var popupPage = new AddTripPopupPage(addTripPopupViewModel);
+            addTripPopupViewModel.PopupPage = popupPage;
+            this.ShowPopup(popupPage);
+
+        }
     }
 }
