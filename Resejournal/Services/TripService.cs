@@ -61,5 +61,35 @@ namespace Resejournal.Services
                 throw;
             }
         }
+
+        public void AddPhoto(TripPhoto photo)
+        {
+            try
+            {
+                Init();
+                if (photo == null)
+                    throw new Exception("The photo entry is not valid");
+                conn.Insert(photo);
+            }
+            catch (Exception)
+            {
+                StateMessage = "Unable to save the photo data";
+                throw;
+            }
+        }
+
+        public List<TripPhoto> GetPhotosForTrip(int tripId)
+        {
+            try
+            {
+                Init();
+                return conn.Table<TripPhoto>().Where(p => p.TripID == tripId).ToList();
+            }
+            catch (Exception)
+            {
+                StateMessage = "Unable to fetch photos";
+                throw;
+            }
+        }
     }
 }

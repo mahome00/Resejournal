@@ -39,7 +39,7 @@
                 VerticalOptions="End"
                 HeightRequest="80"
                 WidthRequest="60"
-                Pressed="Button_Pressed"
+                Command="{Binding TakePictureCommand}"
                    
                      Margin="0,0,25,45"
                 />
