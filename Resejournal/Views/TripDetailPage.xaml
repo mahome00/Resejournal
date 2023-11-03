@@ -3,9 +3,9 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Resejournal.Views.TripDetailPage"
              xmlns:viewmodel="clr-namespace:Resejournal.ViewModels"
+             xmlns:model="clr-namespace:Resejournal.Models"
              Title="{Binding Trip.Title}"
              x:DataType="viewmodel:TripDetailViewModel">
-   
     <Grid>
         <!-- StackLayout för innehåll -->
         <VerticalStackLayout Spacing="10">
@@ -16,15 +16,19 @@
             <Label Text="{Binding Trip.TripDate, StringFormat='{0:yyyy-MM-dd}'}"
                    HorizontalOptions="Center" />
 
+            <!-- Button for loading photos -->
+            <Button Text="Load Photos"
+                    Command="{Binding LoadTripPhotosCommand}"
+                    HorizontalOptions="Center" />
+
             <!-- FlexLayout för att visa en lista med bilder -->
-            <FlexLayout 
+            <FlexLayout BindableLayout.ItemsSource="{Binding TripPhotos}"
                         Direction="Row"
                         Wrap="Wrap"
                         JustifyContent="SpaceAround">
-
                 <BindableLayout.ItemTemplate>
-                    <DataTemplate>
-                        <Image
+                    <DataTemplate x:DataType="model:TripPhoto">
+                        <Image Source="{Binding PhotoPath}"
                                HeightRequest="100"
                                WidthRequest="100" />
                     </DataTemplate>
@@ -32,17 +36,22 @@
             </FlexLayout>
         </VerticalStackLayout>
 
+        <!-- ActivityIndicator to show loading status -->
+        <ActivityIndicator IsVisible="{Binding IsLoading}"
+                           IsRunning="{Binding IsLoading}"
+                           VerticalOptions="Center"
+                           HorizontalOptions="Center"
+                           Color="Gray" />
+        <!-- You can change the color as needed -->
+
         <!-- Kameraikonknapp -->
         <ImageButton Source="Resources/Images/camera_icon.svg"
-                BackgroundColor="Transparent"
-                HorizontalOptions="End"
-                VerticalOptions="End"
-                HeightRequest="80"
-                WidthRequest="60"
-                Command="{Binding TakePictureCommand}"
-                   
-                     Margin="0,0,25,45"
-                />
-        
+                     BackgroundColor="Transparent"
+                     HorizontalOptions="End"
+                     VerticalOptions="End"
+                     HeightRequest="80"
+                     WidthRequest="60"
+                     Command="{Binding TakePictureCommand}"
+                     Margin="0,0,25,45" />
     </Grid>
 </ContentPage>

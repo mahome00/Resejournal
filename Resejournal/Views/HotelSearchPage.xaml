@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Resejournal.Views.HotelSearchPage"
+             xmlns:viewmodel="clr-namespace:Resejournal.ViewModels"
+             xmlns:data="clr-namespace:Resejournal.Data"
+             x:DataType="viewmodel:HotelSearchViewModel"
+             Title="HotelSearchPage">
+
+    <StackLayout Spacing="20"
+                 Padding="15">
+        <Label Text="Search hotels by entering the city you want to live in" />
+        <Entry Placeholder="Enter city"
+               Text="{Binding CityName}" />
+        <DatePicker Date="{Binding CheckIn}" />
+        <DatePicker Date="{Binding CheckOut}" />
+        <Button Text="Search"
+                Command="{Binding SearchHotelsCommand}" />
+
+        <!-- ActivityIndicator -->
+        <ActivityIndicator IsRunning="{Binding IsLoading}"
+                           IsVisible="{Binding IsLoading}" />
+
+        <!-- ListView för att visa hotellen -->
+        <ListView ItemsSource="{Binding HotelDatas}"
+                  HasUnevenRows="True">
+            <!-- Lägger till HasUnevenRows för att tillåta varierande radhöjder -->
+            <ListView.ItemTemplate>
+                <DataTemplate x:DataType="data:HotelData">
+                    <Frame Padding="10"
+                           Margin="5"
+                           CornerRadius="10"
+                           
+                           BorderColor="LightGray">
+                        <StackLayout Orientation="Vertical"
+                                     Spacing="10">
+                            <Label Text="{Binding Title}"
+                                   FontSize="Large"
+                                   FontAttributes="Bold" />
+                            <Label Text="{Binding BubbleRating.Rating}"
+                                   FontSize="Small" />
+                            <!-- Antagande att du har en prisegenskap på din HotelData -->
+                            <Label Text="{Binding CommerceInfo.PriceForDisplay}"
+                                   FontSize="Medium"
+                                    />
+                        </StackLayout>
+                    </Frame>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+    </StackLayout>
+</ContentPage>

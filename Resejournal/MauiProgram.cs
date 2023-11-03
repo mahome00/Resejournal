@@ -31,6 +31,8 @@ namespace Resejournal
             builder.Services.AddTransient<TripDetailViewModel>();
             builder.Services.AddTransient<TripDetailPage>();
             builder.Services.AddTransient<AddTripPopupViewModel>();
+            builder.Services.AddTransient<HotelSearchPage>();
+            builder.Services.AddSingleton<HotelSearchViewModel>();
 
             builder.Services.AddSingleton<MainPage>();
 

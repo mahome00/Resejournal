@@ -2,6 +2,7 @@
 using CommunityToolkit.Mvvm.Input;
 using Resejournal.Models;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 
 namespace Resejournal.ViewModels
 {
@@ -15,6 +16,41 @@ namespace Resejournal.ViewModels
         [ObservableProperty]
         Trip trip;
 
+        [ObservableProperty]
+        bool isRefreshing;
+
+
+
+
+        [RelayCommand]
+        public async Task LoadTripPhotos()
+        {
+
+            IsLoading = true;
+            if (TripPhotos.Any()) TripPhotos.Clear();
+            try
+            {
+                var photos = App.TripService.GetPhotosForTrip(Trip.Id);
+                foreach (var photo in photos)
+                {
+                    TripPhotos.Add(photo);
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"Unable to load photos:{ex.Message}");
+                await Shell.Current.DisplayAlert("Error", "Failed to load photos", "Ok");
+            }
+
+            finally
+            {
+                IsLoading = false;
+            }
+
+
+        }
+
+
 
         [RelayCommand]
         private async Task TakePicture()
@@ -25,13 +61,24 @@ namespace Resejournal.ViewModels
 
                 if (photo != null)
                 {
-                    // save the file into local storage
-                    string localFilePath = Path.Combine(FileSystem.CacheDirectory, photo.FileName);
+
+                    string localFilePath = Path.Combine(FileSystem.AppDataDirectory, photo.FileName);
 
                     using Stream sourceStream = await photo.OpenReadAsync();
                     using FileStream localFileStream = File.OpenWrite(localFilePath);
 
                     await sourceStream.CopyToAsync(localFileStream);
+
+                    // Lägg till en post i databasen
+                    var tripPhoto = new TripPhoto
+                    {
+                        TripID = Trip.Id, // Antar att din aktuella Trip är tillgänglig som 'trip'
+                        PhotoPath = localFilePath,
+                        Description = "" // kan sättas till något värde om du vill
+                    };
+
+                    App.TripService.AddPhoto(tripPhoto); // Antar 
+                    TripPhotos.Add(tripPhoto);
                 }
             }
         }

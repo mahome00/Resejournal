@@ -13,6 +13,7 @@ namespace Resejournal
         {
             InitializeComponent();
             BindingContext = tripListViewModel;
+
         }
 
         private void ShowPopup_Clicked(object sender, EventArgs e)

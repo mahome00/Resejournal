@@ -1,4 +1,5 @@
-﻿using CommunityToolkit.Mvvm.Input;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using Resejournal.Models;
 using Resejournal.Views;
 using System.Collections.ObjectModel;
@@ -16,10 +17,13 @@ namespace Resejournal.ViewModels
         public TripListViewModel()
         {
             Titlepage = "Your Trips";
+            GetTripList();
 
         }
 
-        // Testar för att lägga till trip
+        [ObservableProperty]
+        bool isRefreshing;
+
 
         [RelayCommand]
         async Task GetTripList()
@@ -47,6 +51,7 @@ namespace Resejournal.ViewModels
             finally
             {
                 IsLoading = false;
+                IsRefreshing = false;
             }
 
         }
