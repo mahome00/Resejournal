@@ -69,15 +69,15 @@ namespace Resejournal.ViewModels
 
                     await sourceStream.CopyToAsync(localFileStream);
 
-                    // Lägg till en post i databasen
+                    // Save the photos path in the database 
                     var tripPhoto = new TripPhoto
                     {
-                        TripID = Trip.Id, // Antar att din aktuella Trip är tillgänglig som 'trip'
+                        TripID = Trip.Id,
                         PhotoPath = localFilePath,
-                        Description = "" // kan sättas till något värde om du vill
+                        Description = ""
                     };
 
-                    App.TripService.AddPhoto(tripPhoto); // Antar 
+                    App.TripService.AddPhoto(tripPhoto);
                     TripPhotos.Add(tripPhoto);
                 }
             }

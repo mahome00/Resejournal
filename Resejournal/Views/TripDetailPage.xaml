@@ -7,44 +7,45 @@
              Title="{Binding Trip.Title}"
              x:DataType="viewmodel:TripDetailViewModel">
     <Grid>
-        <!-- StackLayout för innehåll -->
+  
         <VerticalStackLayout Spacing="10">
-            <!-- Visa titeln och datumet för resan -->
+           
             <Label Text="{Binding Trip.Title}"
                    FontSize="Large"
                    HorizontalOptions="Center" />
             <Label Text="{Binding Trip.TripDate, StringFormat='{0:yyyy-MM-dd}'}"
                    HorizontalOptions="Center" />
 
-            <!-- Button for loading photos -->
+         
             <Button Text="Load Photos"
                     Command="{Binding LoadTripPhotosCommand}"
                     HorizontalOptions="Center" />
 
-            <!-- FlexLayout för att visa en lista med bilder -->
+         
             <FlexLayout BindableLayout.ItemsSource="{Binding TripPhotos}"
                         Direction="Row"
                         Wrap="Wrap"
-                        JustifyContent="SpaceAround">
+                        JustifyContent="Start">
                 <BindableLayout.ItemTemplate>
                     <DataTemplate x:DataType="model:TripPhoto">
                         <Image Source="{Binding PhotoPath}"
-                               HeightRequest="100"
-                               WidthRequest="100" />
+                               HeightRequest="150"
+                               WidthRequest="110"
+                             Margin="5"  />
                     </DataTemplate>
                 </BindableLayout.ItemTemplate>
             </FlexLayout>
         </VerticalStackLayout>
 
-        <!-- ActivityIndicator to show loading status -->
+      
         <ActivityIndicator IsVisible="{Binding IsLoading}"
                            IsRunning="{Binding IsLoading}"
                            VerticalOptions="Center"
                            HorizontalOptions="Center"
                            Color="Gray" />
-        <!-- You can change the color as needed -->
+      
 
-        <!-- Kameraikonknapp -->
+    
         <ImageButton Source="Resources/Images/camera_icon.svg"
                      BackgroundColor="Transparent"
                      HorizontalOptions="End"

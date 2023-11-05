@@ -17,7 +17,7 @@ namespace Resejournal.Services
                 RequestUri = new Uri($"https://tripadvisor16.p.rapidapi.com/api/v1/hotels/searchLocation?query={cityName}"),
             };
 
-            request.Headers.Add("X-RapidAPI-Key", "6fff01a254msh4a6fce0e35f147cp1c6406jsnbf00cb28f263");
+            request.Headers.Add("X-RapidAPI-Key", "af5d032bf4msha947d603b5b0c88p1caa8djsnfafcab632749");
             request.Headers.Add("X-RapidAPI-Host", "tripadvisor16.p.rapidapi.com");
             try
             {
@@ -55,7 +55,7 @@ namespace Resejournal.Services
                 RequestUri = new Uri($"https://tripadvisor16.p.rapidapi.com/api/v1/hotels/searchHotels?geoId={geoId}&checkIn={checkIn:yyyy-MM-dd}&checkOut={checkOut:yyyy-MM-dd}&pageNumber=1&currencyCode=USD"),
             };
 
-            request.Headers.Add("X-RapidAPI-Key", "6fff01a254msh4a6fce0e35f147cp1c6406jsnbf00cb28f263");
+            request.Headers.Add("X-RapidAPI-Key", "af5d032bf4msha947d603b5b0c88p1caa8djsnfafcab632749");
             request.Headers.Add("X-RapidAPI-Host", "tripadvisor16.p.rapidapi.com");
 
             using (var response = await client.SendAsync(request))
