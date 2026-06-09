@@ -1,15 +1,4 @@
-I det följande diagrammet illustreras navigeringsflödet i Resejournal-appen. Appen är
-designad för en bred användargrupp, inklusive personer i alla åldrar som har en passion för
-resande och önskar dokumentera sina upplevelser. För att möta dessa behov har vi lagt stor
-vikt vid en enkel och intuitiv design för att säkerställa att appen är lättanvänd för alla
-användare. När appen startas når användaren direkt en översikt över sina tidigare resor. Här
-finns en väl synlig knapp – utmärkt med en grön färg för att symbolisera handlingen 'lägga
-till' – som användare kan klicka på för att skapa nya resor. Ytterligare en knapp, färgad i gult
-för att stå ut och dra uppmärksamhet, leder användaren till ett galleri med bilder knutna till
-den aktuella resan. Inom detta galleri finns en tydlig kameraikon som användare kan trycka
-på för att omedelbart ta bilder och automatiskt lägga till dessa i det valda resealbumet.
-Appens nedre navigationsfält är indelat i två primära sektioner: "Home" för resor och
-"Search" för hotelsökningen.
+
 
 Observera att hotellsökningen inte fungerar för tillfället, eftersom API:t som jag använder har nått sin förfrågningsgräns.
 
